@@ -1,0 +1,129 @@
+{
+  "version": 6,
+  "sections": [
+    {
+      "id": "start",
+      "title": "처음 세팅하기",
+      "description": "순서대로 따라 하면 팔 준비가 끝납니다.",
+      "colorKey": "primaryMain",
+      "videos": [
+        {
+          "id": "time-deal",
+          "title": "타임딜 만들기",
+          "overline": "이걸로 팝니다",
+          "label": "타임딜",
+          "why": "라이브마켓에서 파는 단위가 타임딜입니다. 하나 만들어봐야 감이 옵니다.",
+          "duration": "2:15",
+          "youtubeId": "u-EuAgZ-tHA",
+          "keywords": [
+            "타임딜",
+            "생성",
+            "만들기",
+            "설정",
+            "판매",
+            "특가",
+            "할인",
+            "오픈"
+          ],
+          "task": {
+            "key": "timeDeal",
+            "cta": "타임딜 만들러 가기",
+            "doneLabel": "타임딜 만들어봄"
+          }
+        },
+        {
+          "id": "product",
+          "title": "상품 등록하기",
+          "overline": "하나씩 올리기",
+          "label": "상품 등록",
+          "why": "팔 물건을 올립니다. 옵션과 재고를 여기서 잡습니다.",
+          "duration": "",
+          "youtubeId": "",
+          "keywords": [
+            "상품",
+            "등록",
+            "옵션",
+            "재고",
+            "가격",
+            "이미지"
+          ],
+          "task": {
+            "key": "product",
+            "cta": "상품 등록하러 가기",
+            "doneLabel": "상품 등록됨"
+          }
+        },
+        {
+          "id": "product-bulk",
+          "title": "상품 대량등록하기",
+          "overline": "100개를 한번에",
+          "label": "대량등록",
+          "why": "엑셀 양식 받아서 한번에 올립니다. 하나씩 올리다 밤새지 마세요. (PC에서만 됩니다)",
+          "duration": "",
+          "youtubeId": "",
+          "keywords": [
+            "대량",
+            "일괄",
+            "엑셀",
+            "양식",
+            "업로드",
+            "한번에"
+          ],
+          "task": {
+            "key": "productBulk",
+            "cta": "상품관리로 가기",
+            "doneLabel": "대량등록 해봄"
+          }
+        },
+        {
+          "id": "product-copilot",
+          "title": "상품등록 코파일럿 현장 사용법",
+          "overline": "말로 등록하기",
+          "label": "코파일럿",
+          "why": "라방 현장에서 손 못 쓸 때, 말로 상품을 올립니다.",
+          "duration": "4:00",
+          "youtubeId": "PbgPZSetU2M",
+          "keywords": [
+            "코파일럿",
+            "음성",
+            "말로",
+            "현장",
+            "라방중",
+            "등록",
+            "copilot"
+          ],
+          "task": {
+            "key": "productCopilot",
+            "cta": "코파일럿 써보러 가기",
+            "doneLabel": "코파일럿 써봄"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ops",
+      "title": "운영 · 정산",
+      "description": "판 다음에 하는 일.",
+      "colorKey": "gray1",
+      "videos": [
+        {
+          "id": "cash-receipt-bulk",
+          "title": "현금영수증 대량발행",
+          "overline": "한번에 끊기",
+          "label": "현금영수증",
+          "why": "무통장 주문 현금영수증을 한번에 발행합니다. 쓰려면 운영팀에 요청하세요.",
+          "duration": "1:07",
+          "youtubeId": "Dci0leHVBZw",
+          "keywords": [
+            "현금영수증",
+            "대량발행",
+            "일괄",
+            "무통장",
+            "증빙",
+            "세금"
+          ]
+        }
+      ]
+    }
+  ]
+}
