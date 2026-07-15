@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "sections": [
     {
       "id": "start",
@@ -36,15 +36,17 @@
           "title": "상품 등록하기",
           "overline": "하나씩 올리기",
           "label": "상품 등록",
-          "why": "팔 물건을 올립니다. 옵션과 재고를 여기서 잡습니다.",
+          "why": "팔 물건을 올립니다. 등록하고 가격·옵션 수정, 고정까지.",
           "duration": "",
           "youtubeId": "",
           "keywords": [
             "상품",
             "등록",
             "옵션",
-            "재고",
             "가격",
+            "수정",
+            "고정",
+            "재고",
             "이미지"
           ],
           "task": {
@@ -75,6 +77,33 @@
             "doneLabel": "대량등록 해봄"
           }
         },
+        {
+          "id": "broadcast",
+          "title": "방송 송출하기",
+          "overline": "라방 켜기",
+          "label": "방송 송출",
+          "why": "준비 끝났으면 방송을 켜고 송출합니다.",
+          "duration": "",
+          "youtubeId": "",
+          "keywords": [
+            "방송",
+            "송출",
+            "라방",
+            "라이브",
+            "시작",
+            "켜기",
+            "오비에스",
+            "obs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "live",
+      "title": "라이브 방송",
+      "description": "방송 켜고 진행하는 동안 쓰는 것들.",
+      "colorKey": "actionPrimary",
+      "videos": [
         {
           "id": "product-copilot",
           "title": "상품등록 코파일럿 현장 사용법",
