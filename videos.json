@@ -1,5 +1,5 @@
 {
-  "version": 17,
+  "version": 18,
   "sections": [
     {
       "id": "start",
@@ -94,6 +94,20 @@
             "켜기",
             "유튜브",
             "링크"
+          ]
+        },
+        {
+          "id": "video-5690",
+          "title": "카톡채널 셋팅하기",
+          "overline": "쉽게 구매할 수 있도록",
+          "label": "05. 카톡채널 셋팅",
+          "why": "손님들이 최대한 쉽게 올 수 있도록 카카오톡 채널을 셋팅해봅시다. ",
+          "duration": "",
+          "youtubeId": "pv_WPKtinfI",
+          "keywords": [
+            "카카오톡",
+            "카톡",
+            "채널"
           ]
         }
       ]
