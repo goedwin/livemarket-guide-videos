@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "sections": [
     {
       "id": "start",
@@ -182,7 +182,7 @@
     },
     {
       "id": "ops",
-      "title": "운영 · 정산",
+      "title": "운영 · 결제 ·정산",
       "description": "판 다음에 하는 일.",
       "colorKey": "successDarker",
       "videos": [
@@ -216,6 +216,22 @@
             "발급",
             "회원",
             "단골"
+          ]
+        },
+        {
+          "id": "video-6589439",
+          "title": "결제 후 부분취소(환불)",
+          "overline": "일부 상품만 취소해주세요",
+          "label": "결제 후 부분취소(환불)",
+          "why": "결제된 것 중 이것만 취소해주세요! 라는 요청에-\n통합주문관리 - 주문서 상세 - 취소 수량 적용하면, 끝!",
+          "duration": "",
+          "youtubeId": "4soOu-l5JQU",
+          "keywords": [
+            "결제",
+            "환불",
+            "부분취소",
+            "취소",
+            "통합주문관리"
           ]
         }
       ]
