@@ -1,5 +1,5 @@
 {
-  "version": 13,
+  "version": 14,
   "sections": [
     {
       "id": "start",
@@ -166,14 +166,14 @@
       "id": "ops",
       "title": "운영 · 정산",
       "description": "판 다음에 하는 일.",
-      "colorKey": "gray1",
+      "colorKey": "successDarker",
       "videos": [
         {
           "id": "cash-receipt-bulk",
           "title": "현금영수증 대량발행",
-          "overline": "한번에 끊기",
-          "label": "현금영수증",
-          "why": "무통장 주문 현금영수증을 한번에 발행합니다. 쓰려면 운영팀에 요청하세요.",
+          "overline": "홈택스 가지마세요",
+          "label": "현금영수증 대량발행",
+          "why": "무통장 주문 현금영수증을 한번에 발행합니다. 사용하려면 운영팀에 요청하세요.",
           "duration": "1:07",
           "youtubeId": "Dci0leHVBZw",
           "keywords": [
@@ -183,6 +183,21 @@
             "무통장",
             "증빙",
             "세금"
+          ]
+        },
+        {
+          "id": "video-6241542",
+          "title": "쿠폰 발급",
+          "overline": "단골을 사로잡는",
+          "label": "쿠폰 발급 하기",
+          "why": "개별 회원들에게 쿠폰을 발급하는 기능입니다.",
+          "duration": "",
+          "youtubeId": "_WvQf91wN3k",
+          "keywords": [
+            "쿠폰",
+            "발급",
+            "회원",
+            "단골"
           ]
         }
       ]
