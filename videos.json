@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "sections": [
     {
       "id": "start",
@@ -108,7 +108,7 @@
           "id": "product-copilot",
           "title": "상품등록 코파일럿 현장 사용법",
           "overline": "말로 등록하기",
-          "label": "코파일럿",
+          "label": "상품등록 코파일럿",
           "why": "라방 현장에서 손 못 쓸 때, 말로 상품을 올립니다.",
           "duration": "4:00",
           "youtubeId": "PbgPZSetU2M",
@@ -126,6 +126,22 @@
             "cta": "코파일럿 써보러 가기",
             "doneLabel": "코파일럿 써봄"
           }
+        },
+        {
+          "id": "video-5920436",
+          "title": "유튜브(프리즘) 상품 위젯 사용법",
+          "overline": "판매중인 상품과 옵션, 확정자 보여주기 ",
+          "label": "상품 위젯 만들기",
+          "why": "프리즘 상품 위젯을 만들어서 판매중인 상품과 옵션, 확정자 리스트를 보여주세요. 폭죽도 터진답니다!",
+          "duration": "",
+          "youtubeId": "o0LaGJMea-o",
+          "keywords": [
+            "프리즘",
+            "유튜브",
+            "상품",
+            "위젯",
+            "확정자"
+          ]
         }
       ]
     },
