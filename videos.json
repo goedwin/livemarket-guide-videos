@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 10,
   "sections": [
     {
       "id": "start",
@@ -9,10 +9,10 @@
       "videos": [
         {
           "id": "time-deal",
-          "title": "타임딜 만들기",
-          "overline": "이걸로 팝니다",
-          "label": "타임딜",
-          "why": "라이브마켓에서 파는 단위가 타임딜입니다. 하나 만들어봐야 감이 옵니다.",
+          "title": "01. 타임딜 만들기",
+          "overline": "처음으로 할 일",
+          "label": "01. 타임딜 생성하기",
+          "why": "라이브마켓의 가장 기본, 타임딜 만드는 법을 알아봅시다.",
           "duration": "2:15",
           "youtubeId": "u-EuAgZ-tHA",
           "keywords": [
@@ -33,12 +33,12 @@
         },
         {
           "id": "product",
-          "title": "상품 등록하기",
-          "overline": "하나씩 올리기",
-          "label": "상품 등록",
-          "why": "팔 물건을 올립니다. 등록하고 가격·옵션 수정, 고정까지.",
+          "title": "02. 상품 등록하기",
+          "overline": "상품등록 & 옵션별 재고수정",
+          "label": "02. 상품 등록하기",
+          "why": "판매할 물건을 올리고, 가격과 재고, 옵션을 수정해봅시다. 주문 고정까지!",
           "duration": "",
-          "youtubeId": "",
+          "youtubeId": "KT8cIiAl68U",
           "keywords": [
             "상품",
             "등록",
@@ -59,10 +59,10 @@
           "id": "product-bulk",
           "title": "상품 대량등록하기",
           "overline": "100개를 한번에",
-          "label": "대량등록",
+          "label": "03. 대량상품등록(PC)",
           "why": "엑셀 양식 받아서 한번에 올립니다. 하나씩 올리다 밤새지 마세요. (PC에서만 됩니다)",
           "duration": "",
-          "youtubeId": "",
+          "youtubeId": "g05yrDsaD4c",
           "keywords": [
             "대량",
             "일괄",
@@ -80,11 +80,11 @@
         {
           "id": "broadcast",
           "title": "방송 송출하기",
-          "overline": "라방 켜기",
-          "label": "방송 송출",
-          "why": "준비 끝났으면 방송을 켜고 송출합니다.",
+          "overline": "타임딜 송출뷰:",
+          "label": "04. 방송 송출하기",
+          "why": "유튜브 서버를 활용해 플랫폼 모드(방송송출) 를 사용하는 법을 알아봅시다. ",
           "duration": "",
-          "youtubeId": "",
+          "youtubeId": "6ceEZ_b574k",
           "keywords": [
             "방송",
             "송출",
@@ -92,8 +92,8 @@
             "라이브",
             "시작",
             "켜기",
-            "오비에스",
-            "obs"
+            "유튜브",
+            "링크"
           ]
         }
       ]
