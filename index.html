@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>사용법 탭 편집기</title>
+<style>
+  :root{
+    --bg:#F2F4F6; --card:#fff; --ink:#191F28; --sub:#4E5968; --line:#E5E8EB;
+    --accent:#3182F6; --danger:#E8340A;
+    --pg-primaryMain:#E8340A; --pg-dark:#1E1E1E; --pg-actionPrimary:#143070;
+    --pg-infoDark:#2563EB; --pg-gray1:#444444; --pg-successDarker:#047857;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;background:var(--bg);color:var(--ink)}
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  header h1{font-size:16px;margin:0;font-weight:800}
+  header .ver{font-size:12px;color:var(--sub);background:#EAF2FE;color:#1B64DA;padding:3px 8px;border-radius:6px;font-weight:700}
+  header .spacer{flex:1}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:8px;font-weight:700;font-size:13px;padding:8px 12px;transition:.12s}
+  button:active{transform:scale(.97)}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:disabled{background:#B0C6E6;cursor:not-allowed}
+  .btn-ghost{background:#EDF0F3;color:var(--sub)}
+  .btn-danger{background:transparent;color:var(--danger);padding:4px 8px}
+  input,textarea,select{font-family:inherit;width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;background:#fff;color:var(--ink)}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+  textarea{resize:vertical;min-height:38px}
+  .token-row{display:flex;gap:8px;align-items:center;width:100%}
+  .token-row input{flex:1;max-width:420px}
+  .hint{font-size:12px;color:var(--sub)}
+
+  .section{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:20px;overflow:hidden}
+  .section-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#FBFCFD;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .drag{cursor:grab;color:#B0B8C1;font-size:18px;padding:0 4px;user-select:none}
+  .section-head input.s-title{font-weight:800;font-size:15px;max-width:220px}
+  .section-head input.s-desc{max-width:280px;color:var(--sub)}
+  .swatches{display:flex;gap:6px}
+  .swatch{width:22px;height:22px;border-radius:6px;cursor:pointer;border:2px solid transparent;position:relative}
+  .swatch.on{border-color:#191F28;box-shadow:0 0 0 2px #fff inset}
+  .videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;padding:16px}
+
+  .vcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+  .vcard.dragging{opacity:.4}
+  .vcard.drop-target{outline:2px dashed var(--accent);outline-offset:-2px}
+
+  /* ==== 썸네일 (컴포넌트와 동일 스펙) ==== */
+  .thumb{position:relative;aspect-ratio:16/9;display:flex;align-items:flex-end;padding:16px;overflow:hidden;background-size:cover;background-position:center}
+  .thumb .tint{position:absolute;inset:0}
+  .thumb .order{position:absolute;right:8px;bottom:-16px;font-size:88px;font-weight:900;line-height:1;letter-spacing:-.04em;color:rgba(255,255,255,.09)}
+  .thumb .dur{position:absolute;top:14px;left:16px;font-size:12px;font-weight:700;color:rgba(255,255,255,.65);text-shadow:0 1px 2px rgba(0,0,0,.4)}
+  .thumb .play{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;color:#fff}
+  .thumb .play svg{width:14px;height:14px}
+  .thumb .caption{position:relative;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+  .thumb .overline{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.02em;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+  .thumb .label{display:inline;padding:4px 6px;font-size:18px;font-weight:800;line-height:1.45;letter-spacing:-.02em;color:#fff;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .thumb .badge{position:absolute;top:12px;left:16px;font-size:11px;font-weight:800;padding:3px 7px;border-radius:20px;background:rgba(0,0,0,.35);color:#fff;backdrop-filter:blur(4px)}
+
+  .vbody{padding:12px;display:flex;flex-direction:column;gap:8px}
+  .vbody .field{display:flex;flex-direction:column;gap:3px}
+  .vbody label{font-size:11px;font-weight:700;color:var(--sub)}
+  .vrow{display:flex;gap:8px}
+  .vrow>*{flex:1}
+  .vcard-foot{display:flex;align-items:center;gap:4px;padding:8px 12px;border-top:1px solid var(--line);background:#FBFCFD}
+  .vcard-foot .spacer{flex:1}
+  .move-select{max-width:130px;font-size:12px;padding:5px 8px}
+  .iconbtn{background:#EDF0F3;color:var(--sub);width:30px;height:30px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:15px}
+  .iconbtn:disabled{opacity:.35;cursor:not-allowed}
+
+  .add-row{padding:0 16px 16px}
+  .add-video{width:100%;border:1.5px dashed var(--line);background:#fff;color:var(--sub);padding:12px;border-radius:12px}
+  .add-section{display:block;width:100%;max-width:1100px;margin:0 auto 40px;border:1.5px dashed var(--line);background:#fff;color:var(--sub);padding:16px;border-radius:14px;font-size:14px}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:50;opacity:0;transition:.2s;pointer-events:none}
+  .toast.show{opacity:1}
+  .dirty-dot{width:8px;height:8px;border-radius:50%;background:#F5A623;display:none}
+  .dirty .dirty-dot{display:inline-block}
+</style>
+</head>
+<body>
+<header>
+  <h1>📺 사용법 탭 편집기</h1>
+  <span class="ver" id="verBadge">v–</span>
+  <span class="dirty-dot" id="dirtyDot" title="저장 안 된 변경"></span>
+  <div class="spacer"></div>
+  <div class="token-row">
+    <input id="token" type="password" placeholder="GitHub 토큰 붙여넣기 (저장용, 1회)" />
+    <button class="btn-ghost" id="reloadBtn">불러오기</button>
+    <button class="btn-primary" id="saveBtn" disabled>저장(커밋)</button>
+  </div>
+</header>
+
+<div class="wrap" id="app"></div>
+<button class="add-section" id="addSection">+ 카테고리 추가</button>
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO="goedwin/livemarket-guide-videos", FILE="videos.json", BR="main";
+const RAW=`https://raw.githubusercontent.com/${REPO}/${BR}/${FILE}?t=`;
+const API=`https://api.github.com/repos/${REPO}/contents/${FILE}`;
+
+const COLORS={
+  primaryMain:"#E8340A", dark:"#1E1E1E", actionPrimary:"#143070",
+  infoDark:"#2563EB", gray1:"#444444", successDarker:"#047857"
+};
+const COLOR_LABEL={primaryMain:"빨강",dark:"검정",actionPrimary:"남색",infoDark:"파랑",gray1:"회색",successDarker:"초록"};
+
+// 컴포넌트의 toBaseColor 재현: accent 22% + ink(#1E1E1E) 78%
+function toBaseColor(hex){
+  const a=hx(hex), ink=hx("#1E1E1E"), r=0.22;
+  const m=c=>Math.round(a[c]*r+ink[c]*(1-r)).toString(16).padStart(2,"0");
+  return `#${m("r")}${m("g")}${m("b")}`;
+}
+function hx(h){h=h.replace("#","");return{r:parseInt(h.slice(0,2),16),g:parseInt(h.slice(2,4),16),b:parseInt(h.slice(4,6),16)}}
+
+let data=null, sha=null, dirty=false;
+const $=s=>document.querySelector(s);
+const toast=(m)=>{const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)};
+function markDirty(){dirty=true;$("#saveBtn").disabled=false;$("#dirtyDot").parentElement;document.body.classList.add("dirty")}
+
+async function load(){
+  try{
+    const r=await fetch(RAW+Date.now());
+    data=await r.json();
+    // sha는 저장 때 최신으로 다시 가져온다(토큰 필요). 지금은 표시만.
+    dirty=false;document.body.classList.remove("dirty");$("#saveBtn").disabled=true;
+    render();
+    toast("불러왔어요");
+  }catch(e){toast("불러오기 실패: "+e.message)}
+}
+
+function ytThumb(id){return id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:null}
+
+function render(){
+  $("#verBadge").textContent="v"+(data.version??"?");
+  const app=$("#app");app.innerHTML="";
+  data.sections.forEach((sec,si)=>app.appendChild(sectionEl(sec,si)));
+}
+
+function sectionEl(sec,si){
+  const accent=COLORS[sec.colorKey]||COLORS.gray1;
+  const el=document.createElement("div");el.className="section";
+  const head=document.createElement("div");head.className="section-head";
+  const sUp=icon("↑",()=>moveSection(si,-1));sUp.disabled=(si===0);sUp.title="카테고리 위로";
+  const sDn=icon("↓",()=>moveSection(si,1));sDn.disabled=(si===data.sections.length-1);sDn.title="카테고리 아래로";
+  head.appendChild(sUp);head.appendChild(sDn);
+
+  const title=inp(sec.title,"s-title",v=>{sec.title=v;markDirty()});
+  const desc=inp(sec.description||"","s-desc",v=>{sec.description=v;markDirty()});
+  desc.placeholder="설명 한 줄";
+  head.appendChild(title);head.appendChild(desc);
+
+  const sw=document.createElement("div");sw.className="swatches";
+  Object.keys(COLORS).forEach(k=>{
+    const b=document.createElement("div");b.className="swatch"+(sec.colorKey===k?" on":"");
+    b.style.background=COLORS[k];b.title=COLOR_LABEL[k];
+    b.onclick=()=>{sec.colorKey=k;markDirty();render()};
+    sw.appendChild(b);
+  });
+  head.appendChild(sw);
+
+  const delS=document.createElement("button");delS.className="btn-danger";delS.textContent="카테고리 삭제";
+  delS.onclick=()=>{if(sec.videos.length&&!confirm("영상이 든 카테고리예요. 삭제할까요?"))return;data.sections.splice(si,1);markDirty();render()};
+  const sp=document.createElement("div");sp.style.flex="1";head.appendChild(sp);head.appendChild(delS);
+  el.appendChild(head);
+
+  const grid=document.createElement("div");grid.className="videos";grid.dataset.si=si;
+  sec.videos.forEach((v,vi)=>grid.appendChild(videoEl(v,si,vi,accent)));
+  el.appendChild(grid);
+
+  const addRow=document.createElement("div");addRow.className="add-row";
+  const add=document.createElement("button");add.className="add-video";add.textContent="+ 영상 추가";
+  add.onclick=()=>{sec.videos.push({id:"video-"+Math.floor(performance.now()),title:"새 영상",overline:"",label:"새 영상",why:"",duration:"",youtubeId:"",keywords:[]});markDirty();render()};
+  addRow.appendChild(add);el.appendChild(addRow);
+  return el;
+}
+
+// 전체 영상 순번(워터마크) 계산용
+function globalOrder(si,vi){let n=0;for(let s=0;s<si;s++)n+=data.sections[s].videos.length;return n+vi+1}
+
+function videoEl(v,si,vi,accent){
+  const card=document.createElement("div");card.className="vcard";
+  card.draggable=true;card.dataset.si=si;card.dataset.vi=vi;
+  card.addEventListener("dragstart",e=>{dragSrc={si,vi};card.classList.add("dragging");e.dataTransfer.effectAllowed="move"});
+  card.addEventListener("dragend",()=>{card.classList.remove("dragging");document.querySelectorAll(".drop-target").forEach(x=>x.classList.remove("drop-target"))});
+  card.addEventListener("dragover",e=>{e.preventDefault();card.classList.add("drop-target")});
+  card.addEventListener("dragleave",()=>card.classList.remove("drop-target"));
+  card.addEventListener("drop",e=>{e.preventDefault();dropOn(si,vi)});
+
+  // ---- 썸네일 ----
+  const ready=!!v.youtubeId;
+  const base=toBaseColor(accent);
+  const thumb=document.createElement("div");thumb.className="thumb";
+  const still=ytThumb(v.youtubeId);
+  thumb.style.background=base;
+  if(still){thumb.style.backgroundImage=`url(${still})`}
+  // 틴트: 스틸컷 위에 컬러+어둠 그라디언트(텍스트 가독 + 브랜드 계열 유지)
+  const tintCss=still
+    ? `linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.05) 40%, ${hexA(base,.55)} 78%, ${hexA(base,.86)} 100%)`
+    : "none";
+  thumb.innerHTML=`
+    <div class="tint" style="background:${tintCss}"></div>
+    <span class="order">${String(globalOrder(si,vi)).padStart(2,"0")}</span>
+    ${v.duration?`<span class="dur">${esc(v.duration)}</span>`:""}
+    ${ready?`<span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>`:`<span class="badge">촬영 예정</span>`}
+    <div class="caption">
+      ${v.overline?`<span class="overline">${esc(v.overline)}</span>`:""}
+      <span class="label" style="background:${ready?accent:"#8A8A8A"}">${esc(ready?(v.label||v.title):"촬영 예정")}</span>
+    </div>`;
+  card.appendChild(thumb);
+
+  // ---- 편집 필드 ----
+  const body=document.createElement("div");body.className="vbody";
+  body.appendChild(field("제목",v.title,x=>{v.title=x}));
+  const row1=document.createElement("div");row1.className="vrow";
+  row1.appendChild(field("오버라인(작은 문구)",v.overline||"",x=>{v.overline=x}));
+  row1.appendChild(field("라벨(썸네일 큰 글씨)",v.label||"",x=>{v.label=x}));
+  body.appendChild(row1);
+  body.appendChild(field("설명(왜 봐야 하는지)",v.why||"",x=>{v.why=x},true));
+  const row2=document.createElement("div");row2.className="vrow";
+  row2.appendChild(field("유튜브 ID",v.youtubeId||"",x=>{v.youtubeId=x.trim()},false,"11자리 or 비움"));
+  row2.appendChild(field("길이",v.duration||"",x=>{v.duration=x},false,"2:15"));
+  body.appendChild(row2);
+  body.appendChild(field("키워드(쉼표)",(v.keywords||[]).join(", "),x=>{v.keywords=x.split(",").map(s=>s.trim()).filter(Boolean)}));
+  card.appendChild(body);
+
+  // ---- 푸터: 이동/삭제 ----
+  const foot=document.createElement("div");foot.className="vcard-foot";
+  const up=icon("↑",()=>moveV(si,vi,-1));up.disabled=(vi===0);
+  const dn=icon("↓",()=>moveV(si,vi,1));dn.disabled=(vi===data.sections[si].videos.length-1);
+  foot.appendChild(up);foot.appendChild(dn);
+  const sp=document.createElement("div");sp.className="spacer";foot.appendChild(sp);
+  const sel=document.createElement("select");sel.className="move-select";
+  data.sections.forEach((s,i)=>{const o=document.createElement("option");o.value=i;o.textContent="→ "+s.title;o.selected=(i===si);sel.appendChild(o)});
+  sel.onchange=()=>moveToSection(si,vi,+sel.value);
+  foot.appendChild(sel);
+  const del=document.createElement("button");del.className="btn-danger";del.textContent="삭제";
+  del.onclick=()=>{if(confirm("이 영상 삭제?")){data.sections[si].videos.splice(vi,1);markDirty();render()}};
+  foot.appendChild(del);
+  card.appendChild(foot);
+  return card;
+}
+
+let dragSrc=null;
+function dropOn(si,vi){
+  if(!dragSrc)return;
+  const {si:fsi,vi:fvi}=dragSrc;
+  const item=data.sections[fsi].videos.splice(fvi,1)[0];
+  let tvi=vi; if(fsi===si&&fvi<vi)tvi--;
+  data.sections[si].videos.splice(tvi,0,item);
+  dragSrc=null;markDirty();render();
+}
+function moveV(si,vi,d){const a=data.sections[si].videos;const j=vi+d;if(j<0||j>=a.length)return;[a[vi],a[j]]=[a[j],a[vi]];markDirty();render()}
+function moveToSection(si,vi,ti){if(ti===si)return;const it=data.sections[si].videos.splice(vi,1)[0];data.sections[ti].videos.push(it);markDirty();render()}
+function moveSection(si,d){const j=si+d;if(j<0||j>=data.sections.length)return;[data.sections[si],data.sections[j]]=[data.sections[j],data.sections[si]];markDirty();render()}
+
+function field(label,val,on,area,ph){
+  const f=document.createElement("div");f.className="field";
+  const l=document.createElement("label");l.textContent=label;f.appendChild(l);
+  const e=area?document.createElement("textarea"):document.createElement("input");
+  e.value=val;if(ph)e.placeholder=ph;
+  e.addEventListener("input",()=>{on(e.value);markDirty();scheduleThumbRefresh()});
+  f.appendChild(e);return f;
+}
+let refreshT=null;
+function scheduleThumbRefresh(){clearTimeout(refreshT);refreshT=setTimeout(render,500)}
+function inp(val,cls,on){const e=document.createElement("input");e.className=cls;e.value=val;e.addEventListener("input",()=>on(e.value));return e}
+function icon(t,fn){const b=document.createElement("button");b.className="iconbtn";b.textContent=t;b.onclick=fn;return b}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function hexA(hex,a){const c=hx(hex);return`rgba(${c.r},${c.g},${c.b},${a})`}
+
+// ---- 저장(커밋) ----
+async function save(){
+  const token=$("#token").value.trim();
+  if(!token){toast("GitHub 토큰을 먼저 넣어주세요");$("#token").focus();return}
+  localStorage.setItem("gh_token",token);
+  $("#saveBtn").disabled=true;$("#saveBtn").textContent="저장 중…";
+  try{
+    // 최신 sha
+    const g=await fetch(API+"?ref="+BR,{headers:{Authorization:"token "+token,Accept:"application/vnd.github+json"}});
+    if(!g.ok)throw new Error("sha 조회 실패 ("+g.status+") — 토큰 권한 확인");
+    const meta=await g.json();
+    data.version=(data.version||0)+1;
+    const body=JSON.stringify(data,null,2)+"\n";
+    const content=btoa(unescape(encodeURIComponent(body)));
+    const p=await fetch(API,{method:"PUT",headers:{Authorization:"token "+token,Accept:"application/vnd.github+json"},
+      body:JSON.stringify({message:"사용법 탭 편집기: videos.json 업데이트 [v"+data.version+"]",content,sha:meta.sha,branch:BR})});
+    if(!p.ok){const t=await p.text();throw new Error(p.status+" "+t.slice(0,120))}
+    dirty=false;document.body.classList.remove("dirty");$("#verBadge").textContent="v"+data.version;
+    toast("저장 완료 · 어드민 반영 최대 5분");
+  }catch(e){toast("저장 실패: "+e.message);$("#saveBtn").disabled=false}
+  finally{$("#saveBtn").textContent="저장(커밋)"}
+}
+
+$("#saveBtn").onclick=save;
+$("#reloadBtn").onclick=()=>{if(dirty&&!confirm("저장 안 된 변경이 있어요. 버릴까요?"))return;load()};
+$("#addSection").onclick=()=>{data.sections.push({id:"section-"+Math.floor(performance.now()),title:"새 카테고리",description:"",colorKey:"gray1",videos:[]});markDirty();render()};
+window.addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue=""}});
+const saved=localStorage.getItem("gh_token");if(saved)$("#token").value=saved;
+load();
+</script>
+</body>
+</html>
