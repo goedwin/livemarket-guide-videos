@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "sections": [
     {
       "id": "start",
@@ -81,7 +81,7 @@
           "id": "broadcast",
           "title": "방송 송출하기",
           "overline": "타임딜 송출뷰:",
-          "label": "04. 방송 송출하기",
+          "label": "04. 방송 송출하기(송출셀러)",
           "why": "유튜브 서버를 활용해 플랫폼 모드(방송송출) 를 사용하는 법을 알아봅시다. ",
           "duration": "",
           "youtubeId": "6ceEZ_b574k",
