@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "sections": [
     {
       "id": "start",
@@ -106,9 +106,9 @@
       "videos": [
         {
           "id": "product-copilot",
-          "title": "상품등록 코파일럿 현장 사용법",
-          "overline": "말로 등록하기",
-          "label": "상품등록 코파일럿(현장)",
+          "title": "상품등록 코파일럿(현장/모바일)",
+          "overline": "상품등록 코파일럿",
+          "label": "말로하는 상품등록(현장/모바일)",
           "why": "라방 현장에서 손 못 쓸 때, 말로 상품을 올립니다.",
           "duration": "4:00",
           "youtubeId": "PbgPZSetU2M",
@@ -126,6 +126,24 @@
             "cta": "코파일럿 써보러 가기",
             "doneLabel": "코파일럿 써봄"
           }
+        },
+        {
+          "id": "video-6420197",
+          "title": "상품등록 코파일럿(PC)",
+          "overline": "상품등록 코파일럿",
+          "label": "말로하는 상품등록(PC)",
+          "why": "라방 현장에서 손을 못 쓸 때, 말로 상품을 등록하는 기능입니다. ",
+          "duration": "",
+          "youtubeId": "i9ztGHx77Qk",
+          "keywords": [
+            "코파일럿",
+            "음성",
+            "말로",
+            "현장",
+            "라방중",
+            "등록",
+            "상품등록"
+          ]
         },
         {
           "id": "video-5920436",
