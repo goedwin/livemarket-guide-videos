@@ -32,6 +32,14 @@
   .hint{font-size:12px;color:var(--sub)}
 
   .section{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:20px;overflow:hidden}
+  .hero-block{border:2px solid #E3EAF3}
+  .hero-preview{background:#1E1E1E;padding:28px 26px;display:flex;flex-direction:column;gap:8px}
+  .hero-preview .hp-overline{color:#FF8A3D;font-weight:700;font-size:13px}
+  .hero-preview .hp-title{color:#fff;font-weight:800;font-size:26px;letter-spacing:-.02em}
+  .hero-preview .hp-body{color:#B0B8C1;font-size:15px}
+  .hero-preview .hp-btn{align-self:flex-start;margin-top:12px;background:#E8340A;color:#fff;font-weight:700;font-size:14px;padding:10px 16px;border-radius:8px}
+  .hero-fields{padding:16px;display:flex;flex-direction:column;gap:10px}
+  .hero-fields .hero-label{font-size:13px;font-weight:800;color:var(--sub)}
   .section-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#FBFCFD;border-bottom:1px solid var(--line);flex-wrap:wrap}
   .drag{cursor:grab;color:#B0B8C1;font-size:18px;padding:0 4px;user-select:none}
   .section-head input.s-title{font-weight:800;font-size:15px;max-width:220px}
@@ -134,7 +142,41 @@ function ytThumb(id){return id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:null
 function render(){
   $("#verBadge").textContent="v"+(data.version??"?");
   const app=$("#app");app.innerHTML="";
+  app.appendChild(heroEl());
   data.sections.forEach((sec,si)=>app.appendChild(sectionEl(sec,si)));
+}
+
+// ==== 히어로(맨 위 배너) 편집 + 라이브 미리보기 ====
+function heroEl(){
+  const h=data.hero||(data.hero={overline:"",title:"",body:"",buttonLabel:"",buttonHref:""});
+  const wrap=document.createElement("div");wrap.className="section hero-block";
+
+  // 미리보기 (앱 렌더와 동일: 어두운 배너)
+  const prev=document.createElement("div");prev.className="hero-preview";
+  const hasBtn=!!(h.buttonLabel&&h.buttonLabel.trim());
+  prev.innerHTML=`
+    ${h.overline?`<div class="hp-overline">${esc(h.overline)}</div>`:""}
+    <div class="hp-title">${esc(h.title||"제목을 입력하세요")}</div>
+    ${h.body?`<div class="hp-body">${esc(h.body)}</div>`:""}
+    ${hasBtn?`<div class="hp-btn">${esc(h.buttonLabel)} →</div>`:""}`;
+  wrap.appendChild(prev);
+
+  // 필드
+  const body=document.createElement("div");body.className="hero-fields";
+  const label=document.createElement("div");label.className="hero-label";label.textContent="맨 위 배너 (히어로)";
+  body.appendChild(label);
+  body.appendChild(field("오버라인(작은 문구)",h.overline||"",x=>{h.overline=x},false,"처음 오셨나요?"));
+  body.appendChild(field("제목",h.title||"",x=>{h.title=x},false,"라이브마켓 시작하기"));
+  body.appendChild(field("설명",h.body||"",x=>{h.body=x},true,"순서대로 따라 하면 팔 준비가 끝납니다."));
+  const brow=document.createElement("div");brow.className="vrow";
+  brow.appendChild(field("버튼 라벨(비우면 버튼 없음)",h.buttonLabel||"",x=>{h.buttonLabel=x},false,"타임딜 만들러 가기"));
+  brow.appendChild(field("버튼 링크",h.buttonHref||"",x=>{h.buttonHref=x.trim()},false,"time-deal/create 또는 https://..."));
+  body.appendChild(brow);
+  const hint=document.createElement("div");hint.className="hint";
+  hint.textContent="링크: http로 시작하면 새 창 외부링크, 아니면 어드민 내부 경로(/{스토어}/admin/ 뒤에 붙음).";
+  body.appendChild(hint);
+  wrap.appendChild(body);
+  return wrap;
 }
 
 function sectionEl(sec,si){
