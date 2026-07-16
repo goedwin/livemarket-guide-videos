@@ -1,5 +1,12 @@
 {
-  "version": 18,
+  "version": 19,
+  "hero": {
+    "overline": "처음 오셨나요?",
+    "title": "라이브마켓 시작하기",
+    "body": "순서대로 따라 하면 팔 준비가 끝납니다. 위에서부터 하나씩 보세요.",
+    "buttonLabel": "타임딜 만들러 가기",
+    "buttonHref": "time-deal/create"
+  },
   "sections": [
     {
       "id": "start",
