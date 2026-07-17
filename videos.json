@@ -1,11 +1,11 @@
 {
-  "version": 19,
+  "version": 20,
   "hero": {
     "overline": "처음 오셨나요?",
     "title": "라이브마켓 시작하기",
     "body": "순서대로 따라 하면 팔 준비가 끝납니다. 위에서부터 하나씩 보세요.",
-    "buttonLabel": "타임딜 만들러 가기",
-    "buttonHref": "time-deal/create"
+    "buttonLabel": "전체 가이드 노션에서 보기",
+    "buttonHref": "https://official-groo.notion.site/2d2c7587eebb806a87c4d939f624cd17"
   },
   "sections": [
     {
